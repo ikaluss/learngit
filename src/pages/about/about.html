@@ -1,0 +1,79 @@
+<ion-header>
+    <ion-navbar>
+      <ion-title>
+        <p><small>机柜编号</small></p>
+      </ion-title>
+    </ion-navbar>
+    <ion-toolbar>
+      <div id="div1">
+        <ion-segment [(ngModel)]="cabinet">
+          <ion-segment-button value="storageDevice" (click)="mnuBtn1Toggle_Click()">
+            存储设备
+          </ion-segment-button>
+          <ion-segment-button value="netDevice" (click)="mnuBtn2Toggle_Click()">
+            网络设备
+          </ion-segment-button>
+          <ion-segment-button value="physicalDevice" (click)="mnuBtn3Toggle_Click()">
+            物理设备
+          </ion-segment-button>
+          <ion-segment-button value="photoDevice" (click)="mnuBtn4Toggle_Click()">
+            照片
+          </ion-segment-button>
+        </ion-segment>
+      </div>
+    </ion-toolbar>
+
+  </ion-header>
+
+<ion-menu  [content]="mnuSearch" side="right">
+  <ion-header>
+    <ion-title>所属厂区</ion-title>
+  </ion-header>
+  <ion-content>
+      <p>fhefhoeifhoho</p>
+  </ion-content>
+  <ion-footer>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-6>
+          <button ion-button color="light" full (click)="mnuCancel_Click()" [id]="id1">取消</button>
+        </ion-col>
+        <ion-col col-6>
+          <button ion-button full (click)="mnuSave_Click()">保存</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-footer>
+</ion-menu>
+
+
+
+  <ion-content #mnuSearch>
+
+    <div [ngSwitch]="cabinet" (swipe)="swipeEvent($event)">
+      <ion-list *ngSwitchCase="'storageDevice'"></ion-list>
+      <ion-list *ngSwitchCase="'netDevice'"></ion-list>
+      <ion-list *ngSwitchCase="'physicalDevice'"></ion-list>
+
+      <ion-list *ngSwitchCase="'photoDevice'">
+        <ion-row align-items-center>
+          <ion-col col-4 align-self-center *ngFor="let item of cabinetInfoImg">
+            <ion-thumbnail tappable>
+              <img src="{{item.images}}" class="auto-image" [style.height]="width" (click)="openModal(item.num)" />
+            </ion-thumbnail>
+          </ion-col>
+        </ion-row>
+
+        <!--<img *ngFor="let sss of cabinetInfoImg" src="{{sss.images}}"
+             width="100" height="100"
+             style="padding: 5px;" (click)="openModal(sss.num)">  //-->
+        <button ion-button color="light" full (click)="openModal2({charNum: 2})">Add</button>
+      </ion-list>
+    </div>
+
+  </ion-content>
+
+  <ion-footer no-shadow no-border>
+
+  </ion-footer>
+
